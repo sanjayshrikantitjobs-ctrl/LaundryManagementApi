@@ -1,0 +1,40 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace LaundryMgmt.Infrastructure.Migrations
+{
+    /// <inheritdoc />
+    public partial class AddGarmentServiceImageUrl : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<string>(
+                name: "ImageUrl",
+                table: "Services",
+                type: "nvarchar(500)",
+                maxLength: 500,
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "ImageUrl",
+                table: "Garments",
+                type: "nvarchar(500)",
+                maxLength: 500,
+                nullable: true);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "ImageUrl",
+                table: "Services");
+
+            migrationBuilder.DropColumn(
+                name: "ImageUrl",
+                table: "Garments");
+        }
+    }
+}

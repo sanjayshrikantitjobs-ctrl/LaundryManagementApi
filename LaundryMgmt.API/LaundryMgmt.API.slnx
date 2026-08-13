@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="../../../LaundryManagement/src/LaundryMgmt.Application/LaundryMgmt.Application.csproj" />
-  <Project Path="../../../LaundryManagement/src/LaundryMgmt.Domain/LaundryMgmt.Domain.csproj" />
-  <Project Path="../../../LaundryManagement/src/LaundryMgmt.Infrastructure/LaundryMgmt.Infrastructure.csproj" />
-  <Project Path="../../../LaundryManagement/src/LaundryMgmt.Shared/LaundryMgmt.Shared.csproj" />
+  <Project Path="../LaundryMgmt.Application/LaundryMgmt.Application.csproj" />
+  <Project Path="../LaundryMgmt.Domain/LaundryMgmt.Domain.csproj" />
+  <Project Path="../LaundryMgmt.Infrastructure/LaundryMgmt.Infrastructure.csproj" />
+  <Project Path="../LaundryMgmt.Shared/LaundryMgmt.Shared.csproj" />
   <Project Path="LaundryMgmt.API.csproj" />
 </Solution>

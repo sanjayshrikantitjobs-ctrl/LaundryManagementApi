@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LaundryManagement\src\LaundryMgmt.Application\LaundryMgmt.Application.csproj" />
-    <ProjectReference Include="..\..\..\LaundryManagement\src\LaundryMgmt.Infrastructure\LaundryMgmt.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\LaundryManagement\src\LaundryMgmt.Shared\LaundryMgmt.Shared.csproj" />
+    <ProjectReference Include="..\LaundryMgmt.Application\LaundryMgmt.Application.csproj" />
+    <ProjectReference Include="..\LaundryMgmt.Infrastructure\LaundryMgmt.Infrastructure.csproj" />
+    <ProjectReference Include="..\LaundryMgmt.Shared\LaundryMgmt.Shared.csproj" />
   </ItemGroup>
 
 </Project>
