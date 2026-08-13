@@ -42,14 +42,11 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
-    // Seeds an Admin and a Customer login so there's something to sign in with out of
-    // the box. Dev-only: seed real users through a proper Register/invite flow elsewhere.
     await IdentitySeeder.SeedAsync(app.Services);
     await CatalogSeeder.SeedAsync(app.Services);
 }
