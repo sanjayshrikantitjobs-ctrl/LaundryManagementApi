@@ -34,7 +34,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(AngularCorsPolicy, policy =>
     {
         policy.WithOrigins(builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
-                ?? new[] { "http://localhost:4200" })
+                ?? new[] { "http://localhost:4200", "https://laundry-mgmt-client.pages.dev" })
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials(); // required for SignalR
