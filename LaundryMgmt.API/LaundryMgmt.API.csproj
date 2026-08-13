@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>LaundryMgmt.API</RootNamespace>
+    <UserSecretsId>laundrymgmt-api-secrets</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Removed Microsoft.OpenApi to avoid source-generator mismatch with Microsoft.AspNetCore.OpenApi; rely on Microsoft.AspNetCore.OpenApi and Swashbuckle instead. If you need this package, align versions with AspNetCore packages. -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.10" />
+    <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="8.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LaundryManagement\src\LaundryMgmt.Application\LaundryMgmt.Application.csproj" />
+    <ProjectReference Include="..\..\..\LaundryManagement\src\LaundryMgmt.Infrastructure\LaundryMgmt.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\LaundryManagement\src\LaundryMgmt.Shared\LaundryMgmt.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
