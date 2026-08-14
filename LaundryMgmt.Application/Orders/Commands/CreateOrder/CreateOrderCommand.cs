@@ -19,7 +19,8 @@ public record CreateOrderCommand(
     DateTimeOffset? PreferredPickupAtUtc = null,
     Guid? PickupAddressId = null,
     string? PromoCode = null,
-    bool IsSameDay = false) : IRequest<Guid>;
+    bool IsSameDay = false,
+    DateTimeOffset? PreferredDeliveryAtUtc = null) : IRequest<Guid>;
 
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {
@@ -201,7 +202,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Gui
             EntityId = order.Id.ToString()
         });
 
-        if (request.PreferredPickupAtUtc.HasValue)
+        if (request.PreferredPickupAtUtc.HasValue || request.PreferredDeliveryAtUtc.HasValue)
         {
             Guid? addressId = null;
             if (request.PickupAddressId.HasValue)
@@ -211,14 +212,32 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Gui
                 addressId = addressBelongsToCustomer ? request.PickupAddressId : null;
             }
 
-            _db.PickupDeliveries.Add(new PickupDelivery
+            if (request.PreferredPickupAtUtc.HasValue)
             {
-                Order = order,
-                IsPickup = true,
-                AddressId = addressId,
-                Status = DeliveryStatus.Scheduled,
-                ScheduledAtUtc = request.PreferredPickupAtUtc
-            });
+                _db.PickupDeliveries.Add(new PickupDelivery
+                {
+                    Order = order,
+                    IsPickup = true,
+                    AddressId = addressId,
+                    Status = DeliveryStatus.Scheduled,
+                    ScheduledAtUtc = request.PreferredPickupAtUtc
+                });
+            }
+
+            // The customer's requested delivery slot — a preference for staff to plan
+            // around, same as PreferredPickupAtUtc; the delivery isn't actually
+            // dispatched until an admin/delivery agent moves it through the pipeline.
+            if (request.PreferredDeliveryAtUtc.HasValue)
+            {
+                _db.PickupDeliveries.Add(new PickupDelivery
+                {
+                    Order = order,
+                    IsPickup = false,
+                    AddressId = addressId,
+                    Status = DeliveryStatus.Scheduled,
+                    ScheduledAtUtc = request.PreferredDeliveryAtUtc
+                });
+            }
         }
 
         await _db.SaveChangesAsync(cancellationToken);
